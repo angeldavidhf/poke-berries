@@ -1,3 +1,7 @@
 fastapi
 uvicorn
+requests
+matplotlib
+python-dotenv
 redis
+pytest
