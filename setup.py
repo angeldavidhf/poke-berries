@@ -11,7 +11,7 @@ setup(
     author_email="angeldavidhf@gmail.com",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/angeldavidhf/pokeberries",
+    url="https://github.com/angeldavidhf/poke-berries",
     packages=find_packages(),
     install_requires=[
         "fastapi",
