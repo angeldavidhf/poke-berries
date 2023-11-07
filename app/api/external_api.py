@@ -1,10 +1,19 @@
 import os
-
 import requests
 from fastapi import HTTPException
 
 
 def call_external_api():
+    """
+    Calls an external API to retrieve berry data.
+
+    This function sends requests to the specified API endpoint to obtain data for various berries, including
+    their growth time, ID, name, max harvest, size, smoothness, soil dryness, and natural gift power. The data
+    is then extracted and returned as a list of dictionaries.
+
+    Returns:
+        list: A list of dictionaries, where each dictionary represents the data for a berry.
+    """
     base_url = os.getenv("POKEAPI_BASE_URL")
     berries_endpoint = os.getenv("POKEAPI_BERRIES_ENDPOINT")
 

@@ -15,18 +15,34 @@ berry_stats_key = "berry_stats"
 
 def check_berry_stats():
     """
-    Check for berry data in Redis.
+    Checks for berry data in Redis.
+
+    Checks if the statistics of berry data are available in the Redis cache. If the data exists,
+    it is retrieved and returned as a dictionary. If the data is not found, None is returned.
+
+    Returns:
+        dict or None: A dictionary containing berry statistics or None if the data is not in Redis.
     """
     berry_stats = redis_client.get(berry_stats_key)
     if berry_stats is not None:
-        return berry_stats.decode("utf-8")
+        return json.loads(berry_stats)
     else:
         return None
 
 
 def set_berry_stats(data):
     """
-    Setting stats for berry data in Redis.
+    Sets berry statistics in Redis.
+
+    Calculates and processes statistics for berry data and stores the results in Redis.
+    The function computes statistics like minimum growth time, median growth time, maximum growth time,
+    variance, mean, and frequency of growth times.
+
+    Args:
+        data (list): A list of berry data dictionaries.
+
+    Returns:
+        dict: A dictionary containing computed berry statistics.
     """
     growth_times = []
     frequency_growth_time = defaultdict(int)
@@ -60,11 +76,19 @@ def set_berry_stats(data):
 
 def save_berry_stats(data):
     """
-    Save for berry data in Redis.
+    Saves berry statistics in Redis.
+
+    Converts the berry statistics data to a JSON format and stores it in Redis. In case of any errors
+    during the storage process, an HTTPException with a status code of 500 is raised.
+
+    Args:
+        data (dict): A dictionary containing berry statistics.
+
+    Raises:
+        HTTPException: Raised in case of an error while saving data in Redis.
     """
     try:
         data_json = json.dumps(data)
         redis_client.set(berry_stats_key, data_json)
-
     except Exception as e:
         raise HTTPException(status_code=500, detail="Error saving data in Redis")

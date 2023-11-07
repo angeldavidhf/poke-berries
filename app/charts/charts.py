@@ -5,13 +5,21 @@ import matplotlib.pyplot as plt
 
 def generate_histogram_chart(data):
     """
-    Generates a histogram plot from the data provided.
-    """
+    Generates a histogram plot from the provided data.
 
-    plt.hist(data, bins=10, color='blue', edgecolor='black')
-    plt.title('Berry Data Histogram')
-    plt.xlabel('Value')
-    plt.ylabel('Frequency')
+    Args:
+        data (dict): A dictionary containing data for generating the histogram.
+
+    Returns:
+        str: A base64-encoded image of the histogram plot.
+    """
+    growth_times = list(data["frequency_growth_time"].keys())
+    frequencies = list(data["frequency_growth_time"].values())
+
+    plt.bar(growth_times, frequencies, align='center', alpha=0.5)
+    plt.xlabel("Growth Time")
+    plt.ylabel("Frequency")
+    plt.title('Berry Growth Time Histogram')
 
     chart_image = generate_image_bytes()
     plt.close()
@@ -21,7 +29,10 @@ def generate_histogram_chart(data):
 
 def generate_image_bytes():
     """
-    Converts the Matplotlib plot to a byte representation.
+    Converts the Matplotlib plot to a byte representation and returns it as a base64-encoded string.
+
+    Returns:
+        str: A base64-encoded image of the Matplotlib plot.
     """
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
