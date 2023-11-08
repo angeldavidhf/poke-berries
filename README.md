@@ -29,30 +29,30 @@ Your project follows a RESTful architecture, which means that it focuses on reso
 
 ```bash
   +-------------------------------------+
-  |   External API (Berry Data)        |
+  |   External API (Berry Data)         |
   +-------------------------------------+
                      |
                      v
   +-------------------------------------+
   |     FastAPI Application             |
-  |     +------------------+            |
-  |     | /api/allBerryStats |          |
-  |     |   (Retrieve and   |          |
-  |     |    Store Stats)   |          |
-  |     +------------------+            |
-  |     | /api/berryHistogram|         |
-  |     |   (Generate and   |          |
-  |     |   Display Charts) |          |
+  |     +---------------------+         |
+  |     | /api/allBerryStats  |         |
+  |     |   (Retrieve and     |         |
+  |     |    Store Stats)     |         |
+  |     +---------------------+         |
+  |     | /api/berryHistogram |         |
+  |     |   (Generate and     |         |
+  |     |   Display Charts)   |         |
   +-------------------------------------+
                      |
                      v
   +-------------------------------------+
-  |     Redis (Caching)                |
+  |     Redis (Caching)                 |
   +-------------------------------------+
                      |
                      v
   +-------------------------------------+
-  |     Matplotlib (Charts)            |
+  |     Matplotlib (Charts)             |
   +-------------------------------------+
 ```
 
